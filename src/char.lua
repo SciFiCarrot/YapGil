@@ -7,9 +7,9 @@ function char:load(world1)
 end
 
 function char:update()
-	local fx = 0
-	local fy = 0
-	local strength = 100
+	fx = 0
+	fy = 0
+	strength = 100
 	self.x, self.y = self.body:getPosition()
 end
 
@@ -43,8 +43,6 @@ function char:move(dt)
 end
 
 function char:draw()
-    local x, y = self.body:getPosition()
-    love.graphics.rectangle("fill", x, y, self.shape:getWidth(), self.shape:getHeight())
 	love.graphics.draw(love.graphics.newImage("assets/char.png"), self.x, self.y, 0, 0.3, 0.3)
 	-- love.graphics.draw(self.fixture,)
 end
