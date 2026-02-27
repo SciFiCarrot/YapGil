@@ -1,8 +1,7 @@
 char = {}
 
 function char:load()
-    self.x = love.graphics.getWidth() / 2
-    self.y = love.graphics.getHeight() / 2
+    char_body = love.physics.newBody(world1, love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, "dynamic")
     self.width = 20
     self.height = 20
     self.speed = 50
@@ -14,17 +13,11 @@ function char:update (dt)
 end
 
 function char:move(dt)
-    if love.keyboard.isDown("w") then
-        self.y = self.y - self.speed * dt
-    end
-    if love.keyboard.isDown("s") then
-        self.y = self.y + self.speed * dt
-    end
     if love.keyboard.isDown("a") then
-        self.x = self.x - self.speed * dt
+        char_body:applyForce(-10,0)
     end
     if love.keyboard.isDown("d") then
-        self.x = self.x + self.speed * dt
+        char_body:applyForce(10,0)
     end
 end
 
@@ -42,5 +35,6 @@ function char:sprint()
 end
 
 function char:draw()
-    love.graphics.draw(love.graphics.newImage("assets/char.png"), self.x, self.y,0,0.3,0.3)
+    local x, y = char_body:getPosition()
+    love.graphics.rectangle("fill", x, y, self.width, self.height)
 end
